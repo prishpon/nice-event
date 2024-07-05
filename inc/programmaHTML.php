@@ -1,25 +1,6 @@
 <?php
 function showProgrammaHTML(){ 
-     $request = wp_remote_get( 'https://poppodiumdemeester.nl/event_feed_json' );
-
-if( is_wp_error( $request ) ) {
-  return false; 
-}
-
-$body = wp_remote_retrieve_body( $request );
-
-$data = json_decode( $body );
-
-if( ! empty( $data ) ) {
-  
-  echo '<ul>';
-  foreach( $data->events as $event ) {
-	echo '<li>';
-	  echo '<a href="">' . $event->title . '</a>';
-	echo '</li>';
-  }
-  echo '</ul>';
-} ?>
+      ?>
    <main class="grid">
 			<div class="overview-title">
 				<h1>Programma</h1>

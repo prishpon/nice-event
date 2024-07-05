@@ -37,7 +37,17 @@ class NiceEventsCalendarPlugin {
 }
 
 function fetchEvents(){
-  return "Data will be here";
+  $request = wp_remote_get( 'https://poppodiumdemeester.nl/event_feed_json' );
+
+  if( is_wp_error( $request ) ) {
+    return false; 
+  }
+  
+  $body = wp_remote_retrieve_body( $request );
+  
+  $data = json_decode($body);
+  
+  return $data;
 }
 
 
