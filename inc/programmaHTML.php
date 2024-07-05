@@ -1,20 +1,31 @@
 <?php
-function showProgrammaHTML(){ ?>
+function showProgrammaHTML(){ 
+     $request = wp_remote_get( 'https://poppodiumdemeester.nl/event_feed_json' );
+
+if( is_wp_error( $request ) ) {
+  return false; 
+}
+
+$body = wp_remote_retrieve_body( $request );
+
+$data = json_decode( $body );
+
+if( ! empty( $data ) ) {
+  
+  echo '<ul>';
+  foreach( $data->events as $event ) {
+	echo '<li>';
+	  echo '<a href="">' . $event->title . '</a>';
+	echo '</li>';
+  }
+  echo '</ul>';
+} ?>
    <main class="grid">
 			<div class="overview-title">
 				<h1>Programma</h1>
 			</div>
 			<section class="program">
 				<ul class="program__list">
-					<!-- NOTE: the class program-card--clr-primary--400
-				This class regulates the colours
-				variations are
-				red / primary is the fall back
-				1. program-card--clr-primary--400 // red
-				2. program-card--clr-secondary--400 // orange
-				3. program-card--clr-secondary--500 // green
-				4. program-card--clr-secondary--600 // blue
-			-->
 					<li class="program-card program-card--clr-secondary--400">
 						<div class="program-card__item  ">
 							<div class="program-card__info">
