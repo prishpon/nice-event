@@ -15,6 +15,7 @@ class NiceEventsCalendarPlugin {
   function __construct() {
     add_action('wp_enqueue_scripts', array($this,'niceEventStyles'));
     add_shortcode('event_calendar',array($this,'event_calendar'));
+    add_action( 'rest_api_init',array($this,'niceEventRoutes'));
   }
 
 
@@ -27,6 +28,18 @@ class NiceEventsCalendarPlugin {
   function event_calendar(){
     showProgrammaHTML();
   }
+
+  function niceEventRoutes(){
+    register_rest_route( 'event/v1', 'showEvents', array(
+         'methods'=> WP_REST_Server::READABLE,
+         'callback'=>array($this,'fetchEvents')
+    ));
+}
+
+function fetchEvents(){
+  return "Data will be here";
+}
+
 
 }
 
