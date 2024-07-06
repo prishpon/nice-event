@@ -1,4 +1,6 @@
 const get_rest_events = document.getElementById('get_rest_events');
+console.log(`button for update is ${niceEventData.buttonForUpdate}`);
+console.log(`url for update is ${niceEventData.urlForUpdate}`);
 
 jQuery(document).ready(function ($) {
 

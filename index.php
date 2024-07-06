@@ -16,6 +16,8 @@ class NiceEventsCalendarPlugin {
     add_action('wp_enqueue_scripts', array($this,'niceEventStyles'));
     add_shortcode('event_calendar',array($this,'event_calendar'));
     add_action( 'rest_api_init',array($this,'niceEventRoutes'));
+    $button_for_update;
+    $url_for_update;
   }
 
 
@@ -24,12 +26,21 @@ class NiceEventsCalendarPlugin {
     wp_enqueue_style('nice_styles', plugin_dir_url(__FILE__) . 'src/style.css');
 
     wp_localize_script('nice_js', 'niceEventData', array(
-      'root_url' => get_site_url()
+      'root_url' => get_site_url(),
+      'buttonForUpdate' => $this->button_for_update,
+      'urlForUpdate' =>$this->url_for_update
     ));
 
   }
 
-  function event_calendar(){
+  function event_calendar($atts){
+    $a = shortcode_atts( array(
+      'button_for_update' =>'true',
+      'url_for_update' =>'true',
+    ), $atts );
+  
+    $this->button_for_update = "{$a['button_for_update']}";
+    $this->url_for_update = "{$a['url_for_update']}";
     showProgrammaHTML();
   }
 
