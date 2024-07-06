@@ -23,6 +23,10 @@ class NiceEventsCalendarPlugin {
     wp_enqueue_script('nice_js', plugin_dir_url(__FILE__) . 'src/index.js', array('jquery'), '1.0', false);
     wp_enqueue_style('nice_styles', plugin_dir_url(__FILE__) . 'src/style.css');
 
+    wp_localize_script('nice_js', 'niceEventData', array(
+      'root_url' => get_site_url()
+    ));
+
   }
 
   function event_calendar(){

@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
 
   function loadEvents() {
     $.ajax({
-      url:"http://foo.local/wp-json/event/v1/showEvents",
+	  url:niceEventData.root_url + "/wp-json/event/v1/showEvents",
       type: "GET",
       success: response => {
 
