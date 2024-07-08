@@ -34,8 +34,10 @@ jQuery(document).ready(function ($) {
       success: response => {
 
         let events = response.events;
+		let arrTime;
 
         for (let key in events) {
+		    arrTime = events[key].times[0];
           $(`
                    <li class="program-card program-card--${events[key].color}">
 						<div class="program-card__item  ">
