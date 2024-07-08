@@ -19,7 +19,7 @@ class NiceEventsCalendarPlugin {
     $button_for_update;
     $url_for_update;
   }
-
+ 
 
   function niceEventStyles() {
     wp_enqueue_script('nice_js', plugin_dir_url(__FILE__) . 'src/index.js', array('jquery'), '1.0', false);

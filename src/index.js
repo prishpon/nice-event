@@ -1,21 +1,16 @@
 const get_rest_events = document.getElementById('get_rest_events');
 
 
-
-
-
 jQuery(document).ready(function ($) {
 
 	if(niceEventData.urlForUpdate == "true"){
 		showEventsOnPageLoad();
-		console.log('Load by url is true');
 	}else{
 		console.log('Load by url is false');
 	}
 	
 	if(niceEventData.buttonForUpdate == "true"){
 		showEventsOnBtn();
-		console.log('Load by button is true');
 	}else{
 		console.log('Load by button is false');
 	}
@@ -31,6 +26,7 @@ jQuery(document).ready(function ($) {
 	   window.addEventListener("load",loadEvents);
 	}	
 
+	//methods
   function loadEvents() {
     $.ajax({
 	  url:niceEventData.root_url + "/wp-json/event/v1/showEvents",
@@ -41,7 +37,7 @@ jQuery(document).ready(function ($) {
 
         for (let key in events) {
           $(`
-       <li class="program-card program-card--${events[key].color}">
+                   <li class="program-card program-card--${events[key].color}">
 						<div class="program-card__item  ">
 							<div class="program-card__info">
 								<div class="program-card__info-link">
@@ -51,10 +47,11 @@ jQuery(document).ready(function ($) {
 								<time class="program-card__info-time" datetime="2017-02-14">
 									<svg version="1.1" focusable="false" viewBox="0 0 7 6" class="eagerlyicon  eagerlyicon-disc  program-card__info-date-disc" aria-hidden="true">
 										<path fill="#EB6057" d="M.31 4.23V1.77L2.013 0h2.593L6.31 1.77v2.46L4.606 6H2.013L.31 4.23Z"></path>
-									</svg> Vr 22 mrt 2024
+									</svg> 
+									${arrTime.program_start}
 								</time>
 								<ul class="program-card__info-tags-list">
-										${Object.keys(events[key].tags).map(item=>`
+									${Object.keys(events[key].tags).map(item=>`
 										  <li class="program-card__info-tag">
 											${document.createElement("span").innerText = item}
 										  </li>	
@@ -63,14 +60,22 @@ jQuery(document).ready(function ($) {
 								</ul>
 							</div>
 							<div class="program-card__content program-card__hover-animation-wrapper--opacity">
-								<p class="program-card__content-text">Je favoriete avond is terug. Dé gratis open-mic van Almere waar alles kan en de stage voor iedereen is.</p>
+								<p class="program-card__content-text">${events[key].intro}</p>
 							</div>
 							<div class="program-card__btn-wrapper">
 								<ul class="program-card__prices-list program-card__hover-animation-wrapper--opacity">
-									<li class="program-card__prices-item">Deur: €6,00</li>
-									<li class="program-card__prices-item">Online: €7,50</li>
+								    	${arrTime.price ?
+											Object.entries(arrTime.price).map(item=>`
+										  <li class="program-card__prices-item">
+											${document.createElement("span").innerText = item[0]}
+											  :
+											${document.createElement("span").innerText = item[1]}
+										  </li>	
+											`
+										).join("")
+									:""}
 								</ul>
-								<a href="https://ticketlink.here" class="btn btn--min-width program-card__btn">tickets</a>
+								<a href="${arrTime.price ? arrTime.ticket_link : '#'}" class="btn btn--min-width program-card__btn">${arrTime.price ? `tickets` : `gratis`}</a>
 							</div>
 						</div>
 					</li>
