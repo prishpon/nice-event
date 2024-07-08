@@ -63,8 +63,7 @@ function fetchEvents(){
   $data = json_decode($body);
   
   return $data;
-}
-
+  }
 
 }
 
