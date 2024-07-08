@@ -5,21 +5,19 @@ jQuery(document).ready(function ($) {
 
 	if(niceEventData.urlForUpdate == "true"){
 		showEventsOnPageLoad();
-	}else{
-		console.log('Load by url is false');
 	}
 	
 	if(niceEventData.buttonForUpdate == "true"){
 		showEventsOnBtn();
 	}else{
-		console.log('Load by button is false');
+		get_rest_events.style.display = 'none';
 	}
 	
 	//events
 	function showEventsOnBtn(){
 		if (get_rest_events) {
 			get_rest_events.addEventListener('click', loadEvents);
-		  }
+		  } 
 	}
 	
 	function showEventsOnPageLoad(){
@@ -50,7 +48,10 @@ jQuery(document).ready(function ($) {
 									<svg version="1.1" focusable="false" viewBox="0 0 7 6" class="eagerlyicon  eagerlyicon-disc  program-card__info-date-disc" aria-hidden="true">
 										<path fill="#EB6057" d="M.31 4.23V1.77L2.013 0h2.593L6.31 1.77v2.46L4.606 6H2.013L.31 4.23Z"></path>
 									</svg> 
-									${arrTime.program_start}
+									${getWeekDay(arrTime.program_start)}
+									${getEventDay(arrTime.program_start)}
+									${getEventMonth(arrTime.program_start)}
+									${getEventYear(arrTime.program_start)}
 								</time>
 								<ul class="program-card__info-tags-list">
 									${Object.keys(events[key].tags).map(item=>`
@@ -91,4 +92,42 @@ jQuery(document).ready(function ($) {
       }
     })
   }
+//Get date methods
+  function getEventDate(eventDate){
+	let year = eventDate.slice(0,4);
+    let month = eventDate.slice(4,6);
+    let day = eventDate.slice(6,8);
+
+	date = new Date(year, month, day);
+
+	return date;
+}
+
+function getEventDay(eventDate){
+	let d = getEventDate(eventDate);
+	let EventDate = d.getDate(eventDate);
+	return EventDate;
+}
+
+function getWeekDay(eventDate){
+  
+	let d = getEventDate(eventDate);
+	let eventDay = d.getDay();
+
+	let daysArr = ['Zo', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Za'];
+    return daysArr[eventDay];
+}
+
+function getEventMonth(eventDate){
+	let d = getEventDate(eventDate);
+	let eventMonth = d.getMonth();
+
+	let monthArr = ['dec', 'jan', 'fbr', 'mrt', 'apr', 'mei', 'jun','jul','aug','sep','oct','nov'];
+	return monthArr[eventMonth];
+}
+
+function getEventYear(eventDate){
+    let year = eventDate.slice(0,4);
+	return year;
+ }
 })

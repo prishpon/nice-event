@@ -4,7 +4,9 @@ function showProgrammaHTML(){
    <main class="grid">
 			<div class="overview-title">
 				<h1>Programma</h1>
-				<span style="color:white;font-size:2rem;" id="get_rest_events">Rest Test</span>
+				<div class="update-events">
+			    	<span class="btn btn--min-width program-card__btn" id="get_rest_events">Update Events</span>
+				</div>
 			</div>
 			<section class="program">
 				                <ul class="program__list">
