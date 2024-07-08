@@ -1,12 +1,35 @@
 const get_rest_events = document.getElementById('get_rest_events');
-console.log(`button for update is ${niceEventData.buttonForUpdate}`);
-console.log(`url for update is ${niceEventData.urlForUpdate}`);
+
+
+
+
 
 jQuery(document).ready(function ($) {
 
-  if (get_rest_events) {
-    get_rest_events.addEventListener('click', loadEvents);
-  }
+	if(niceEventData.urlForUpdate == "true"){
+		showEventsOnPageLoad();
+		console.log('Load by url is true');
+	}else{
+		console.log('Load by url is false');
+	}
+	
+	if(niceEventData.buttonForUpdate == "true"){
+		showEventsOnBtn();
+		console.log('Load by button is true');
+	}else{
+		console.log('Load by button is false');
+	}
+	
+	//events
+	function showEventsOnBtn(){
+		if (get_rest_events) {
+			get_rest_events.addEventListener('click', loadEvents);
+		  }
+	}
+	
+	function showEventsOnPageLoad(){
+	   window.addEventListener("load",loadEvents);
+	}	
 
   function loadEvents() {
     $.ajax({
