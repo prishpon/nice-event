@@ -27,8 +27,9 @@ class NiceEventsCalendarPlugin {
 
     wp_localize_script('nice_js', 'niceEventData', array(
       'root_url' => get_site_url(),
-      'buttonForUpdate' => $this->button_for_update,
-      'urlForUpdate' =>$this->url_for_update
+      'buttonForUpdate' => $this->button_for_update ?? true ,
+      'urlForUpdate' =>$this->url_for_update ?? true 
+  
     ));
 
   }
